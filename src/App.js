@@ -12,7 +12,9 @@ function App() {
 
   return (
     <main>
+      <div className="blob-yellow"></div>
       {startPage}
+      <div className="blob-blue"></div>
     </main>
   );
 }
