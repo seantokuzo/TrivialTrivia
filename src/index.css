@@ -18,3 +18,45 @@ body {
   margin: 0;
 }
 
+.start-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50%;
+  padding: 20px;
+}
+
+.start-div h1 {
+  font-family: 'Karla';
+  font-size: 31px;
+  line-height: 37px;
+  margin-bottom: 0;
+}
+
+.start-div h4 {
+  font-weight: normal;
+  line-height: 19px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.start-button {
+  width: 193px;
+  height: 52px;
+  margin-top: 5px;
+
+  background: #4D5B9E;
+  border-radius: 15px;
+
+  font-size: 16px;
+  line-height: 19px;
+  color: #F5F7FB;
+}
+
+.start-button:focus {
+  outline: none;
+}
+
+.start-button:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
