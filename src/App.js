@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Question from './Question'
+import Questions from './Questions'
 
 function App() {
 
@@ -16,8 +16,6 @@ function App() {
       )
   }, [])
 
-  console.log(trivia)
-
   const startPage = (
     <div className="start-div">
       <h1>Trivial Trivia</h1>
@@ -28,10 +26,7 @@ function App() {
 
   const triviaPage = (
     <div className='trivia-container'>
-      <Question />
-      <Question />
-      <Question />
-      <Question />
+      <Questions trivia={trivia} />
       <button className='trivia-button'>Check Answers</button>
     </div>
   )
