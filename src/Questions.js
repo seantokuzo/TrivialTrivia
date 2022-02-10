@@ -13,7 +13,7 @@ export default function Question(props) {
                     <h3>{obj.question}</h3>
                     <div className="answer-choices-div">
                         {obj.possibleAnswers.map((answer, i) => (
-                            < div className="answer-choice" key={nanoid()} id={nanoid()}>
+                            <div className="answer-choice" key={nanoid()} id={nanoid()}>
                                 <p>{answer}</p>
                             </div >
                         ))}

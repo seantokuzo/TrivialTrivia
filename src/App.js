@@ -4,12 +4,9 @@ import { decode } from 'html-entities'
 
 function App() {
   const [startPage, setstartPage] = useState(false)
-  const [trivia, setTrivia] = useState([{
-    question: '',
-    correctAnswer: '',
-    possibleAnswers: []
-  }])
+  const [trivia, setTrivia] = useState([])
 
+  //SET TRIVIA STATE ON PAGE LOAD
   useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&type=multiple")
       .then(res => res.json())
@@ -23,6 +20,7 @@ function App() {
     .catch(e => console.log(e))
   }, [])
 
+  
   console.log(trivia)
 
   function startGame() {
