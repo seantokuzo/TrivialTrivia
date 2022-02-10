@@ -26,7 +26,7 @@ export default function Question(props) {
     )
 
     return (
-        <div>
+        <div className="questions-all-container">
             {allQuestions}
         </div>
     )
