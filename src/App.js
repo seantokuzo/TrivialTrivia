@@ -1,7 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Question from './Question'
 
 function App() {
+
+  const [trivia, setTrivia] = useState([])
+
+  useEffect(() => {
+    fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+      .then(res => res.json())
+      .then(data => setTrivia(data.results.map(obj => ({
+        question: obj.question,
+        correctAnswer: obj.correct_answer,
+        possibleAnswers: [...obj.incorrect_answers, obj.correct_answer]
+      })))
+      )
+  }, [])
+
+  console.log(trivia)
 
   const startPage = (
     <div className="start-div">
