@@ -18,6 +18,11 @@ body {
   margin: 0;
   color: var(--font-color);
   background-color: var(--off-white);
+  font-family: 'Inter', sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .blob-yellow {
@@ -117,21 +122,66 @@ body {
 }
 
 .trivia-container {
-
+  margin-top: 150px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .question-container {
+  width: 86%;
+  min-width: 330px;
+  
+  border-bottom: 0.794239px solid #DBDEF0;
+}
 
+.question-container h3 {
+  font-family: Karla;
+  font-size: 16px;
+  color: #293264;
+  margin: 20px 0 0 0;
 }
 
 .answer-choices-div {
+  display: flex;
 
+  margin: 15px 0 10px 0;
 }
 
 .answer-choice {
+  min-width: 66px;
+  height: 21px;
+  border-radius: 8px;
+  margin-right: 7px;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10.24px;
+  line-height: 12px;
+  
+  text-align: center;
+  
+  border: 0.794239px solid #4D5B9E;
+  color: #293264;
 }
 
-.button-check-answers {
+.trivia-button {
+  width: 120px;
+  height: 35px;
+
+  font-family: Inter;
+  font-weight: 600;
+  font-size: 11px;
   
+  color: #F5F7FB;
+  background: #4D5B9E;
+  border-radius: 10px;
+
+  margin-top: 30px;
 }
