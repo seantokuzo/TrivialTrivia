@@ -2,7 +2,7 @@ import React from 'react'
 
 function App() {
 
-    const startPage = (
+  const startPage = (
     <div className="start-div">
       <h1>Trivial Trivia</h1>
       <h4>How much trivial knowledge do you possess</h4>

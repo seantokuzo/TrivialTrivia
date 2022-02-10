@@ -18,6 +18,59 @@ body {
   margin: 0;
 }
 
+.blob-yellow {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  top: -100px;
+  right: -100px;
+  background-color: var(--blob-yellow);
+  z-index: -1;
+  mix-blend-mode: color;
+  animation: blob-yellow 15s ease-in-out infinite alternate
+}
+
+@keyframes blob-yellow {
+  0%{border-radius: 26% 74% 61% 39% / 54% 67% 33% 46%}
+  10%{border-radius: 74% 26% 47% 53% / 68% 46% 54% 32%}
+  20%{border-radius: 48% 52% 30% 70% / 27% 37% 63% 73%}
+  30%{border-radius: 73% 27% 57% 43% / 28% 67% 33% 72%}
+  40%{border-radius: 63% 37% 56% 44% / 25% 28% 72% 75%}
+  50%{border-radius: 39% 61% 70% 30% / 61% 29% 71% 39%}
+  60%{border-radius: 27% 73% 29% 71% / 73% 51% 49% 27%}
+  70%{border-radius: 39% 61% 65% 35% / 74% 65% 35% 26%}
+  80%{border-radius: 55% 45% 37% 63% / 38% 30% 70% 62%}
+  90%{border-radius: 25% 75% 70% 30% / 39% 50% 50% 61%}
+  100%{border-radius: 66% 34% 33% 67% / 65% 73% 27% 35%}
+  }
+  
+.blob-blue {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  left: -100px;
+  bottom: -100px;
+  background-color: var(--blob-blue);
+  border-radius: 73% 27% 57% 43% / 28% 67% 33% 72%;
+  z-index: -2;
+  mix-blend-mode:color;
+  animation: blob-blue 15s ease-in-out infinite alternate
+}
+
+@keyframes blob-blue {
+  100%{border-radius: 26% 74% 61% 39% / 54% 67% 33% 46%}
+  90%{border-radius: 74% 26% 47% 53% / 68% 46% 54% 32%}
+  80%{border-radius: 48% 52% 30% 70% / 27% 37% 63% 73%}
+  70%{border-radius: 73% 27% 57% 43% / 28% 67% 33% 72%}
+  60%{border-radius: 63% 37% 56% 44% / 25% 28% 72% 75%}
+  50%{border-radius: 39% 61% 70% 30% / 61% 29% 71% 39%}
+  40%{border-radius: 27% 73% 29% 71% / 73% 51% 49% 27%}
+  30%{border-radius: 39% 61% 65% 35% / 74% 65% 35% 26%}
+  20%{border-radius: 55% 45% 37% 63% / 38% 30% 70% 62%}
+  10%{border-radius: 25% 75% 70% 30% / 39% 50% 50% 61%}
+  0%{border-radius: 66% 34% 33% 67% / 65% 73% 27% 35%}
+  }
+
 .start-div {
   display: flex;
   flex-direction: column;
