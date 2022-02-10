@@ -172,7 +172,7 @@ body {
   justify-content: center;
   align-items: center;
 
-  
+  background-color: var(--off-white);  
   border: 0.794239px solid #4D5B9E;
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Questions from './Questions'
+import { decode } from 'html-entities'
 
 function App() {
 
@@ -14,11 +15,13 @@ function App() {
       .then(res => res.json())
       .then(data => setTrivia(data.results.map(obj => ({
         question: obj.question,
-        correctAnswer: obj.correct_answer,
-        possibleAnswers: [...obj.incorrect_answers, obj.correct_answer]
+        correctAnswer: decode(obj.correct_answer),
+        possibleAnswers: [...decode(obj.incorrect_answers), decode(obj.correct_answer)].sort(() => (Math.random() > .5) ? 1 : -1)
       })))
       )
   }, [])
+
+  console.log(trivia)
 
   const startPage = (
     <div className="start-div">
