@@ -1,16 +1,36 @@
 import React, { useState, useEffect } from 'react'
-import Questions from './Questions'
+import Questions from './components/Questions'
 import { decode } from 'html-entities'
 
 function App() {
-  const [startPage, setstartPage] = useState(false)
+  const [startPage, setStartPage] = useState(true)
+  const [fetchToggler, setFetchToggler] = useState(false)
   const [showAnswers, setShowAnswers] = useState(false)
   const [trivia, setTrivia] = useState([])
   const [selectionCount, setSelectionCount] = useState(0)
+  const [userStats, setUserStats] = useState({
+    numberCorrect: 0,
+    totalCorrect: 0,
+    gamesPlayed: 0,
+    perfects: 0,
+    fails: 0,
+    averageScore: 0
+  })
+  // console.log(trivia)
+  // console.log(trivia.map(obj => obj.correctAnswer))
+  console.log(userStats)
+  console.log(fetchToggler)
+  console.log(selectionCount)
+
+  function newGame() {
+    setShowAnswers(false)
+    setFetchToggler(prev => !prev)
+    setSelectionCount(0)
+  }
 
   //SET TRIVIA STATE ON PAGE LOAD
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+    fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple")
       .then(res => res.json())
       .then(data => setTrivia(data.results.map(obj => ({
         question: decode(obj.question),
@@ -21,15 +41,18 @@ function App() {
         selectedAnswer: ''
       }))))
       .catch(e => console.log(e))
-  }, [startPage])
+  }, [fetchToggler])
 
   function startGame() {
-    setstartPage(false)
+    setStartPage(false)
   }
 
+  //HANDLE SELECTING ANSWERS
   function selectAnswer(questionIndex, answer) {
+    //IF GAME IS OVER
     if (showAnswers) {
       return
+      //SELECTING ANSWER FOR FIRST TIME
     } else if (trivia[questionIndex].selectedAnswer !== answer
       && trivia[questionIndex].selectedAnswer === '') {
       setTrivia(prevTrivia => (
@@ -40,6 +63,7 @@ function App() {
         ))
       ))
       setSelectionCount(prev => prev + 1)
+      //IF SWITCHING SELECTED ANSWERS
     } else if (trivia[questionIndex].selectedAnswer !== answer) {
       setTrivia(prevTrivia => (
         [...prevTrivia].map((obj, i) => (
@@ -48,6 +72,7 @@ function App() {
             : obj
         ))
       ))
+      //DESELECTING ANSWER
     } else {
       setTrivia(prevTrivia => (
         [...prevTrivia].map((obj, i) => (
@@ -59,15 +84,49 @@ function App() {
       setSelectionCount(prev => prev - 1)
     }
   }
-  console.log(trivia.map(obj => obj.correctAnswer))
-  console.log(trivia.map(obj => obj.selectedAnswer))
 
+  //COUNT HOW MANY ANSWERS ARE CORRENT AND STORE
+  const correctCount = trivia.reduce((acc, obj) => {
+    if (obj.correctAnswer === obj.selectedAnswer) {
+      return acc + 1
+    } else return acc
+  }, 0)
+
+  //CHECK ANSWERS
   function checkAnswers() {
+    //IF HAVEN'T SELECTED AN ANSWER FOR ALL QUESTIONS
     if (selectionCount !== 5) {
       alert("Don't be scared, answer ALL the questions")
       return
+    } else if (correctCount === 5) {
+      setShowAnswers(true)
+      setUserStats(prevUserStats => ({
+        ...prevUserStats,
+        numberCorrect: correctCount,
+        totalCorrect: prevUserStats.totalCorrect + correctCount,
+        gamesPlayed: prevUserStats.gamesPlayed + 1,
+        perfects: prevUserStats.perfects + 1,
+        averageScore: Math.floor((prevUserStats.totalCorrect + correctCount) / ((prevUserStats.gamesPlayed + 1) * 5) * 100)
+      }))
+    } else if (correctCount === 0) {
+      setShowAnswers(true)
+      setUserStats(prevUserStats => ({
+        ...prevUserStats,
+        numberCorrect: correctCount,
+        totalCorrect: prevUserStats.totalCorrect + correctCount,
+        gamesPlayed: prevUserStats.gamesPlayed + 1,
+        fails: prevUserStats.fails + 1,
+        averageScore: Math.floor((prevUserStats.totalCorrect + correctCount) / ((prevUserStats.gamesPlayed + 1) * 5) * 100)
+      }))
     } else {
       setShowAnswers(true)
+      setUserStats(prevUserStats => ({
+        ...prevUserStats,
+        numberCorrect: correctCount,
+        totalCorrect: prevUserStats.totalCorrect + correctCount,
+        gamesPlayed: prevUserStats.gamesPlayed + 1,
+        averageScore: Math.floor((prevUserStats.totalCorrect + correctCount) / ((prevUserStats.gamesPlayed + 1) * 5) * 100)
+      }))
     }
   }
 
@@ -92,10 +151,14 @@ function App() {
           onClick={checkAnswers}
         >
           Check Answers</button>
-        : <button
-          className='trivia-button'
-        >
-          New Questions</button>
+        : <div className='results-div'>
+          <h4 className='results'>You scored {correctCount}/5 correct answers</h4>
+          <button
+            className='trivia-button'
+            onClick={newGame}
+          >
+            New Questions</button>
+        </div>
       }
     </div>
   )

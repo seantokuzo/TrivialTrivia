@@ -18,7 +18,7 @@ export default function Question(props) {
                                     key={nanoid()}
                                     className="answer-choice"
                                     style={{
-                                        border: answer === props.trivia[questionIndex].selectedAnswer || answer === props.trivia[questionIndex].correctAnswer
+                                        border: (!props.showAnswers && answer === props.trivia[questionIndex].selectedAnswer) || (props.showAnswers && answer === props.trivia[questionIndex].correctAnswer)
                                             ? "none"
                                             : "0.8px solid #4D5B9E",
                                         backgroundColor: props.showAnswers && answer !== props.trivia[questionIndex].correctAnswer && answer === props.trivia[questionIndex].selectedAnswer
