@@ -202,3 +202,11 @@ body {
 
   margin-top: 10px;
 }
+
+.trivia-button:focus {
+  outline: none;
+}
+
+.trivia-button:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}

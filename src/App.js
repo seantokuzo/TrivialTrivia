@@ -4,7 +4,9 @@ import { decode } from 'html-entities'
 
 function App() {
   const [startPage, setstartPage] = useState(false)
+  const [showAnswers, setShowAnswers] = useState(false)
   const [trivia, setTrivia] = useState([])
+  const [selectionCount, setSelectionCount] = useState(0)
 
   //SET TRIVIA STATE ON PAGE LOAD
   useEffect(() => {
@@ -18,29 +20,48 @@ function App() {
           .sort(() => (Math.random() > .5) ? 1 : -1),
         selectedAnswer: ''
       }))))
-    .catch(e => console.log(e))
+      .catch(e => console.log(e))
   }, [startPage])
-
-  
-  // console.log(trivia)
 
   function startGame() {
     setstartPage(false)
   }
 
   function selectAnswer(questionIndex, optionIndex, answer) {
-    console.log(questionIndex)
-    console.log(optionIndex)
-    console.log(answer)
-    setTrivia(prevTrivia => (
-      [...prevTrivia].map((obj, i) => (
-        i === questionIndex
-          ? { ...prevTrivia[questionIndex], selectedAnswer: answer }
-          : obj
+    if (trivia[questionIndex].selectedAnswer !== answer
+      && trivia[questionIndex].selectedAnswer === '') {
+      setTrivia(prevTrivia => (
+        [...prevTrivia].map((obj, i) => (
+          i === questionIndex
+            ? { ...prevTrivia[questionIndex], selectedAnswer: answer }
+            : obj
+        ))
       ))
-    ))
+      setSelectionCount(prev => prev + 1)
+    } else if (trivia[questionIndex].selectedAnswer !== answer) {
+      setTrivia(prevTrivia => (
+        [...prevTrivia].map((obj, i) => (
+          i === questionIndex
+            ? { ...prevTrivia[questionIndex], selectedAnswer: answer }
+            : obj
+        ))
+      ))
+    } else {
+      setTrivia(prevTrivia => (
+        [...prevTrivia].map((obj, i) => (
+          i === questionIndex
+            ? { ...prevTrivia[questionIndex], selectedAnswer: '' }
+            : obj
+        ))
+      ))
+      setSelectionCount(prev => prev - 1)
+    }
   }
+  console.log(selectionCount)
   console.log(trivia)
+
+  function checkAnswers() {
+  }
 
   const startPageDisplay = (
     <div className="start-div">
@@ -55,8 +76,19 @@ function App() {
       <Questions
         trivia={trivia}
         selectAnswer={selectAnswer}
+        showAnswers={showAnswers}
       />
-      <button className='trivia-button'>Check Answers</button>
+      {!showAnswers
+        ? <button
+          className='trivia-button'
+          onClick={checkAnswers}
+        >
+          Check Answers</button>
+        : <button
+          className='trivia-button'
+        >
+          New Questions</button>
+      }
     </div>
   )
 
