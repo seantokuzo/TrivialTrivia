@@ -15,17 +15,32 @@ function App() {
         correctAnswer: decode(obj.correct_answer),
         possibleAnswers: [...obj.incorrect_answers, obj.correct_answer]
           .map(string => decode(string))
-          .sort(() => (Math.random() > .5) ? 1 : -1)
+          .sort(() => (Math.random() > .5) ? 1 : -1),
+        selectedAnswer: ''
       }))))
     .catch(e => console.log(e))
-  }, [])
+  }, [startPage])
 
   
-  console.log(trivia)
+  // console.log(trivia)
 
   function startGame() {
     setstartPage(false)
   }
+
+  function selectAnswer(questionIndex, optionIndex, answer) {
+    console.log(questionIndex)
+    console.log(optionIndex)
+    console.log(answer)
+    setTrivia(prevTrivia => (
+      [...prevTrivia].map((obj, i) => (
+        i === questionIndex
+          ? { ...prevTrivia[questionIndex], selectedAnswer: answer }
+          : obj
+      ))
+    ))
+  }
+  console.log(trivia)
 
   const startPageDisplay = (
     <div className="start-div">
@@ -37,7 +52,10 @@ function App() {
 
   const triviaPage = (
     <div className='trivia-container'>
-      <Questions trivia={trivia} />
+      <Questions
+        trivia={trivia}
+        selectAnswer={selectAnswer}
+      />
       <button className='trivia-button'>Check Answers</button>
     </div>
   )
