@@ -27,8 +27,10 @@ function App() {
     setstartPage(false)
   }
 
-  function selectAnswer(questionIndex, optionIndex, answer) {
-    if (trivia[questionIndex].selectedAnswer !== answer
+  function selectAnswer(questionIndex, answer) {
+    if (showAnswers) {
+      return
+    } else if (trivia[questionIndex].selectedAnswer !== answer
       && trivia[questionIndex].selectedAnswer === '') {
       setTrivia(prevTrivia => (
         [...prevTrivia].map((obj, i) => (
@@ -57,10 +59,16 @@ function App() {
       setSelectionCount(prev => prev - 1)
     }
   }
-  console.log(selectionCount)
-  console.log(trivia)
+  console.log(trivia.map(obj => obj.correctAnswer))
+  console.log(trivia.map(obj => obj.selectedAnswer))
 
   function checkAnswers() {
+    if (selectionCount !== 5) {
+      alert("Don't be scared, answer ALL the questions")
+      return
+    } else {
+      setShowAnswers(true)
+    }
   }
 
   const startPageDisplay = (
