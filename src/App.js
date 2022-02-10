@@ -1,4 +1,5 @@
 import React from 'react'
+import Question from './Question'
 
 function App() {
 
@@ -10,13 +11,24 @@ function App() {
     </div>
   )
 
+  const triviaPage = (
+    <div className='trivia-container'>
+      <Question />
+      <Question />
+      <Question />
+      <Question />
+      <button className='trivia-button'>Check Answers</button>
+    </div>
+  )
+
   return (
     <main>
       <div className="blob-yellow"></div>
-      {startPage}
+      {/* {startPage} */}
+      {triviaPage}
       <div className="blob-blue"></div>
     </main>
-  );
+  )
 }
 
-export default App;
+export default App
