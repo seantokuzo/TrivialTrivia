@@ -3,7 +3,11 @@ import Questions from './Questions'
 
 function App() {
 
-  const [trivia, setTrivia] = useState([])
+  const [trivia, setTrivia] = useState([{
+    question: '',
+    correctAnswer: '',
+    possibleAnswers: []
+  }])
 
   useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&type=multiple")
