@@ -1,7 +1,7 @@
 :root {
   --off-white: #F5F7FB;
   --blob-yellow: #FFFAD1;
-  --blob-blue: #DEEBF8;
+  --blob-blue: #49749e;
   --font-color: #293264;
   --button-blue: #4D5B9E;
   --selected-answer: #D6DBF5;
@@ -16,6 +16,8 @@
 
 body {
   margin: 0;
+  color: var(--font-color);
+  background-color: var(--off-white);
 }
 
 .blob-yellow {
@@ -53,7 +55,7 @@ body {
   background-color: var(--blob-blue);
   border-radius: 73% 27% 57% 43% / 28% 67% 33% 72%;
   z-index: -2;
-  mix-blend-mode:color;
+  mix-blend-mode: color-burn;
   animation: blob-blue 15s ease-in-out infinite alternate
 }
 
