@@ -1,13 +1,16 @@
 :root {
   --off-white: #F5F7FB;
-  --blob-yellow: #FFFAD1;
-  --blob-blue: #49749e;
   --font-color: #293264;
   --button-blue: #4D5B9E;
   --selected-answer: #D6DBF5;
   --correct-answer: #94D7A2;
   --wrong-answer: #F8BCBC;
   --question-divider: #DBDEF0;
+  
+  --clr-purple: #0004ff;
+  --clr-fuscia: #6200ff;
+  --clr-red: #820000;
+  --clr-orange: #ff6a00;
 }
 
 * {
@@ -25,100 +28,190 @@ body {
   align-items: center;
 }
 
-/* .blob-yellow {
+.outer-blob-one {
   position: absolute;
   width: 250px;
   height: 250px;
-  top: -100px;
-  right: -100px;
-  background-color: var(--blob-yellow);
+  box-shadow:
+    inset 0px 0px 50px -10px var(--clr-purple),
+    0px 0px 50px 0 var(--clr-purple);
+  opacity: 1;
   z-index: -1;
-  mix-blend-mode: color;
-  animation: blob-yellow 15s ease-in-out infinite alternate;
+  mix-blend-mode: color-burn;
+  animation: outer-blob-one 15s ease-in-out infinite;
 }
 
-@keyframes blob-yellow {
-  0%{border-radius: 26% 74% 61% 39% / 54% 67% 33% 46%;}
+@keyframes outer-blob-one {
+  0% {
+    border-radius: 26% 74% 61% 39% / 54% 67% 33% 46%;
+    top: -10%;
+    left: 85%;
+  }
   10%{border-radius: 74% 26% 47% 53% / 68% 46% 54% 32%;}
   20%{border-radius: 48% 52% 30% 70% / 27% 37% 63% 73%;}
+  25% {
+    top: -10%;
+    left: -20%;
+  }
   30%{border-radius: 73% 27% 57% 43% / 28% 67% 33% 72%;}
-  40%{border-radius: 63% 37% 56% 44% / 25% 28% 72% 75%;}
-  50%{border-radius: 39% 61% 70% 30% / 61% 29% 71% 39%;}
+  40%{border-radius: 63% 37% 56% 44% / 47% 28% 72% 18%;}
+  50% {
+    border-radius: 39% 61% 70% 30% / 61% 29% 71% 39%;
+    top: 90%;
+    left: -20%;
+  }
   60%{border-radius: 27% 73% 29% 71% / 73% 51% 49% 27%;}
   70%{border-radius: 39% 61% 65% 35% / 74% 65% 35% 26%;}
+  75% {
+    top: 90%;
+    left: 85%;
+  }
   80%{border-radius: 55% 45% 37% 63% / 38% 30% 70% 62%;}
   90%{border-radius: 25% 75% 70% 30% / 39% 50% 50% 61%;}
-  100%{border-radius: 66% 34% 33% 67% / 65% 73% 27% 35%;}
+  100% {
+    border-radius: 26% 74% 61% 39% / 54% 67% 33% 46%;
+    top: -10%;
+    left: 85%;
   }
-  
-.blob-blue {
+}
+
+.inner-blob-one {
   position: absolute;
   width: 250px;
   height: 250px;
-  left: -100px;
-  bottom: -100px;
-  background-color: var(--blob-blue);
+  background: linear-gradient(var(--clr-fuscia), var(--clr-purple));
+  box-shadow:
+    inset 0px 0px 50px 0px var(--off-white);
+  opacity: .6;
   border-radius: 73% 27% 57% 43% / 28% 67% 33% 72%;
   z-index: -2;
   mix-blend-mode: color-burn;
-  animation: blob-blue 15s ease-in-out infinite alternate;
+  animation: inner-blob-one 15s ease-in-out infinite;
 }
 
-@keyframes blob-blue {
-  100%{border-radius: 26% 74% 61% 39% / 54% 67% 33% 46%;}
-  90%{border-radius: 74% 26% 47% 53% / 68% 46% 54% 32%;}
-  80%{border-radius: 48% 52% 30% 70% / 27% 37% 63% 73%;}
-  70%{border-radius: 73% 27% 57% 43% / 28% 67% 33% 72%;}
-  60%{border-radius: 63% 37% 56% 44% / 25% 28% 72% 75%;}
-  50%{border-radius: 39% 61% 70% 30% / 61% 29% 71% 39%;}
-  40%{border-radius: 27% 73% 29% 71% / 73% 51% 49% 27%;}
-  30%{border-radius: 39% 61% 65% 35% / 74% 65% 35% 26%;}
-  20%{border-radius: 55% 45% 37% 63% / 38% 30% 70% 62%;}
+@keyframes inner-blob-one {
+  0% {
+    border-radius: 26% 74% 61% 39% / 54% 67% 33% 46%;
+    top: -10%;
+    left: 85%;
+  }
+  10%{border-radius: 74% 26% 47% 53% / 68% 46% 54% 32%;}
+  20%{border-radius: 48% 52% 30% 70% / 27% 37% 63% 73%;}
+  25% {
+    top: -10%;
+    left: -18%;
+  }
+  30%{border-radius: 73% 27% 57% 43% / 28% 67% 33% 72%;}
+  40%{border-radius: 63% 37% 56% 44% / 47% 28% 72% 18%;}
+  50% {
+    border-radius: 39% 61% 70% 30% / 61% 29% 71% 39%;
+    top: 86%;
+    left: -20%;
+  }
+  60%{border-radius: 27% 73% 29% 71% / 73% 51% 49% 27%;}
+  70%{border-radius: 39% 61% 65% 35% / 74% 65% 35% 26%;}
+  75% {
+    top: 90%;
+    left: 84%;
+  }
+  80%{border-radius: 55% 45% 37% 63% / 38% 30% 70% 62%;}
+  90%{border-radius: 25% 75% 70% 30% / 39% 50% 50% 61%;}
+  100% {
+    border-radius: 26% 74% 61% 39% / 54% 67% 33% 46%;
+    top: -10%;
+    left: 85%;
+  }
+}
+
+.outer-blob-two {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  box-shadow:
+    inset 0px 0px 50px -10px var(--clr-red),
+    0px 0px 80px -20px #00000050;
+  opacity: 1;
+  z-index: -1;
+  mix-blend-mode: color-burn;
+  animation: outer-blob-two 15s ease-in-out infinite;
+}
+
+@keyframes outer-blob-two {
+  0% {
+    border-radius: 66% 34% 33% 67% / 65% 73% 27% 35%;
+    top: 85%;
+    left: -20%;
+  }
   10%{border-radius: 25% 75% 70% 30% / 39% 50% 50% 61%;}
-  0%{border-radius: 66% 34% 33% 67% / 65% 73% 27% 35%;}
-  } */
-
-.start-div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50%;
-  padding: 20px;
+  20%{border-radius: 55% 45% 37% 63% / 38% 30% 70% 62%;}
+  25% {
+    top: 85%;
+    left: 85%;
+  }
+  30%{border-radius: 39% 61% 65% 35% / 74% 65% 35% 26%;}
+  40%{border-radius: 74% 26% 47% 53% / 68% 46% 54% 32%;}
+  50% {
+    top: -15%;
+    left: 85%;
+  }
+  60%{border-radius: 63% 37% 56% 44% / 25% 28% 72% 75%;}
+  70%{border-radius: 73% 27% 57% 43% / 28% 67% 33% 72%;}
+  75% {
+    top: -15%;
+    left: -20%;
+  }
+  80%{border-radius: 48% 52% 30% 70% / 27% 37% 63% 73%;}
+  90%{border-radius: 74% 26% 47% 53% / 68% 46% 54% 32%;}
+  100% {
+    border-radius: 66% 34% 33% 67% / 65% 73% 27% 35%;
+    top: 85%;
+    left: -20%;
+  }
 }
 
-.start-div h1 {
-  font-family: 'Karla';
-  font-size: 31px;
-  line-height: 37px;
-  margin-bottom: 0;
+.inner-blob-two {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  transform: scale(.7);
+  background: linear-gradient(var(--clr-orange), var(--clr-red));
+  border-radius: 73% 27% 57% 43% / 28% 67% 33% 72%;
+  z-index: -2;
+  mix-blend-mode: color-burn;
+  animation: inner-blob-two 15s ease-in-out infinite;
 }
 
-.start-div h4 {
-  font-weight: normal;
-  line-height: 19px;
-  margin-top: 5px;
-  text-align: center;
-}
-
-.start-button {
-  width: 193px;
-  height: 52px;
-  margin-top: 5px;
-
-  background: #4D5B9E;
-  border-radius: 15px;
-
-  font-size: 16px;
-  line-height: 19px;
-  color: #F5F7FB;
-}
-
-.start-button:focus {
-  outline: none;
-}
-
-.start-button:active {
-  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+@keyframes inner-blob-two {
+  0% {
+    border-radius: 66% 34% 33% 67% / 65% 73% 27% 35%;
+    top: 85%;
+    left: -20%;
+  }
+  10%{border-radius: 25% 75% 70% 30% / 39% 50% 50% 61%;}
+  20%{border-radius: 55% 45% 37% 63% / 38% 30% 70% 62%;}
+  25% {
+    top: 85%;
+    left: 83%;
+  }
+  30%{border-radius: 39% 61% 65% 35% / 74% 65% 35% 26%;}
+  40%{border-radius: 74% 26% 47% 53% / 68% 46% 54% 32%;}
+  50% {
+    top: -15%;
+    left: 85%;
+  }
+  60%{border-radius: 63% 37% 56% 44% / 25% 28% 72% 75%;}
+  70%{border-radius: 73% 27% 57% 43% / 28% 67% 33% 72%;}
+  75% {
+    top: -15%;
+    left: -20%;
+  }
+  80%{border-radius: 48% 52% 30% 70% / 27% 37% 63% 73%;}
+  90%{border-radius: 74% 26% 47% 53% / 68% 46% 54% 32%;}
+  100% {
+    border-radius: 66% 34% 33% 67% / 65% 73% 27% 35%;
+    top: 85%;
+    left: -20%;
+  }
 }
 
 .trivia-container {
@@ -158,6 +251,7 @@ body {
 .answer-choices-div {
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   height: auto;
   margin: 7px 0 10px 0;
 }
@@ -196,7 +290,7 @@ body {
   font-weight: 600;
   font-size: 11px;
   
-  color: #F5F7FB;
+  color: var(--off-white);
   background: #4D5B9E;
   border-radius: 10px;
 
@@ -225,4 +319,47 @@ body {
 .results {
   font-size: 13px;
   margin-bottom: 10px;
+}
+
+.start-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50%;
+  padding: 20px;
+}
+
+.start-div h1 {
+  font-family: 'Karla';
+  font-size: 31px;
+  line-height: 37px;
+  margin-bottom: 0;
+}
+
+.start-div h4 {
+  font-weight: normal;
+  line-height: 19px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.start-button {
+  width: 193px;
+  height: 52px;
+  margin-top: 5px;
+
+  background: var(--button-blue);
+  border-radius: 15px;
+
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--off-white);
+}
+
+.start-button:focus {
+  outline: none;
+}
+
+.start-button:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }

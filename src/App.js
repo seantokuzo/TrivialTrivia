@@ -181,9 +181,11 @@ function App() {
 
   return (
     <main>
-      {/* <div className="blob-yellow"></div> */}
+      <div className="outer-blob-one"></div>
+      <div className="inner-blob-one"></div>
+      <div className="outer-blob-two"></div>
+      <div className="inner-blob-two"></div>
       {startPage ? startPageDisplay : triviaPage}
-      {/* <div className="blob-blue"></div> */}
     </main>
   )
 }
