@@ -8,7 +8,7 @@ export default function Question(props) {
         <div className="question-container" key={nanoid()}>
           <h3>{obj.question}</h3>
           <div className="answer-choices-div">
-            {obj.possibleAnswers.map((answer, optionIndex) => {
+            {obj.possibleAnswers.map((answer) => {
               return (
                 <div
                   key={nanoid()}

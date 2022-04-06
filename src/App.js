@@ -8,39 +8,40 @@ function App() {
   const [showAnswers, setShowAnswers] = useState(false)
   const [trivia, setTrivia] = useState([])
   const [selectionCount, setSelectionCount] = useState(0)
-  const [userStats, setUserStats] = useState({
-    numberCorrect: 0,
-    totalCorrect: 0,
-    gamesPlayed: 0,
-    perfects: 0,
-    fails: 0,
-    averageScore: 0
-  })
-  // console.log(trivia)
-  // console.log(trivia.map(obj => obj.correctAnswer))
-  console.log(userStats)
-  console.log(fetchToggler)
-  console.log(selectionCount)
+  // const [userStats, setUserStats] = useState({
+  //   numberCorrect: 0,
+  //   totalCorrect: 0,
+  //   gamesPlayed: 0,
+  //   perfects: 0,
+  //   fails: 0,
+  //   averageScore: 0
+  // })
 
   function newGame() {
     setShowAnswers(false)
-    setFetchToggler(prev => !prev)
+    setFetchToggler((prev) => !prev)
     setSelectionCount(0)
   }
 
   //SET TRIVIA STATE ON PAGE LOAD
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple")
-      .then(res => res.json())
-      .then(data => setTrivia(data.results.map(obj => ({
-        question: decode(obj.question),
-        correctAnswer: decode(obj.correct_answer),
-        possibleAnswers: [...obj.incorrect_answers, obj.correct_answer]
-          .map(string => decode(string))
-          .sort(() => (Math.random() > .5) ? 1 : -1),
-        selectedAnswer: ''
-      }))))
-      .catch(e => console.log(e))
+    fetch(
+      'https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple'
+    )
+      .then((res) => res.json())
+      .then((data) =>
+        setTrivia(
+          data.results.map((obj) => ({
+            question: decode(obj.question),
+            correctAnswer: decode(obj.correct_answer),
+            possibleAnswers: [...obj.incorrect_answers, obj.correct_answer]
+              .map((string) => decode(string))
+              .sort(() => (Math.random() > 0.5 ? 1 : -1)),
+            selectedAnswer: ''
+          }))
+        )
+      )
+      .catch((e) => console.log(e))
   }, [fetchToggler])
 
   function startGame() {
@@ -53,35 +54,37 @@ function App() {
     if (showAnswers) {
       return
       //SELECTING ANSWER FOR FIRST TIME
-    } else if (trivia[questionIndex].selectedAnswer !== answer
-      && trivia[questionIndex].selectedAnswer === '') {
-      setTrivia(prevTrivia => (
-        [...prevTrivia].map((obj, i) => (
+    } else if (
+      trivia[questionIndex].selectedAnswer !== answer &&
+      trivia[questionIndex].selectedAnswer === ''
+    ) {
+      setTrivia((prevTrivia) =>
+        [...prevTrivia].map((obj, i) =>
           i === questionIndex
             ? { ...prevTrivia[questionIndex], selectedAnswer: answer }
             : obj
-        ))
-      ))
-      setSelectionCount(prev => prev + 1)
+        )
+      )
+      setSelectionCount((prev) => prev + 1)
       //IF SWITCHING SELECTED ANSWERS
     } else if (trivia[questionIndex].selectedAnswer !== answer) {
-      setTrivia(prevTrivia => (
-        [...prevTrivia].map((obj, i) => (
+      setTrivia((prevTrivia) =>
+        [...prevTrivia].map((obj, i) =>
           i === questionIndex
             ? { ...prevTrivia[questionIndex], selectedAnswer: answer }
             : obj
-        ))
-      ))
+        )
+      )
       //DESELECTING ANSWER
     } else {
-      setTrivia(prevTrivia => (
-        [...prevTrivia].map((obj, i) => (
+      setTrivia((prevTrivia) =>
+        [...prevTrivia].map((obj, i) =>
           i === questionIndex
             ? { ...prevTrivia[questionIndex], selectedAnswer: '' }
             : obj
-        ))
-      ))
-      setSelectionCount(prev => prev - 1)
+        )
+      )
+      setSelectionCount((prev) => prev - 1)
     }
   }
 
@@ -100,33 +103,45 @@ function App() {
       return
     } else if (correctCount === 5) {
       setShowAnswers(true)
-      setUserStats(prevUserStats => ({
-        ...prevUserStats,
-        numberCorrect: correctCount,
-        totalCorrect: prevUserStats.totalCorrect + correctCount,
-        gamesPlayed: prevUserStats.gamesPlayed + 1,
-        perfects: prevUserStats.perfects + 1,
-        averageScore: Math.floor((prevUserStats.totalCorrect + correctCount) / ((prevUserStats.gamesPlayed + 1) * 5) * 100)
-      }))
+      // setUserStats((prevUserStats) => ({
+      //   ...prevUserStats,
+      //   numberCorrect: correctCount,
+      //   totalCorrect: prevUserStats.totalCorrect + correctCount,
+      //   gamesPlayed: prevUserStats.gamesPlayed + 1,
+      //   perfects: prevUserStats.perfects + 1,
+      //   averageScore: Math.floor(
+      //     ((prevUserStats.totalCorrect + correctCount) /
+      //       ((prevUserStats.gamesPlayed + 1) * 5)) *
+      //       100
+      //   )
+      // }))
     } else if (correctCount === 0) {
       setShowAnswers(true)
-      setUserStats(prevUserStats => ({
-        ...prevUserStats,
-        numberCorrect: correctCount,
-        totalCorrect: prevUserStats.totalCorrect + correctCount,
-        gamesPlayed: prevUserStats.gamesPlayed + 1,
-        fails: prevUserStats.fails + 1,
-        averageScore: Math.floor((prevUserStats.totalCorrect + correctCount) / ((prevUserStats.gamesPlayed + 1) * 5) * 100)
-      }))
+      // setUserStats((prevUserStats) => ({
+      //   ...prevUserStats,
+      //   numberCorrect: correctCount,
+      //   totalCorrect: prevUserStats.totalCorrect + correctCount,
+      //   gamesPlayed: prevUserStats.gamesPlayed + 1,
+      //   fails: prevUserStats.fails + 1,
+      //   averageScore: Math.floor(
+      //     ((prevUserStats.totalCorrect + correctCount) /
+      //       ((prevUserStats.gamesPlayed + 1) * 5)) *
+      //       100
+      //   )
+      // }))
     } else {
       setShowAnswers(true)
-      setUserStats(prevUserStats => ({
-        ...prevUserStats,
-        numberCorrect: correctCount,
-        totalCorrect: prevUserStats.totalCorrect + correctCount,
-        gamesPlayed: prevUserStats.gamesPlayed + 1,
-        averageScore: Math.floor((prevUserStats.totalCorrect + correctCount) / ((prevUserStats.gamesPlayed + 1) * 5) * 100)
-      }))
+      // setUserStats((prevUserStats) => ({
+      //   ...prevUserStats,
+      //   numberCorrect: correctCount,
+      //   totalCorrect: prevUserStats.totalCorrect + correctCount,
+      //   gamesPlayed: prevUserStats.gamesPlayed + 1,
+      //   averageScore: Math.floor(
+      //     ((prevUserStats.totalCorrect + correctCount) /
+      //       ((prevUserStats.gamesPlayed + 1) * 5)) *
+      //       100
+      //   )
+      // }))
     }
   }
 
@@ -134,40 +149,41 @@ function App() {
     <div className="start-div">
       <h1>Trivial Trivia</h1>
       <h4>How much trivial knowledge do you possess</h4>
-      <button className="start-button" onClick={startGame}>Start Game</button>
+      <button className="start-button" onClick={startGame}>
+        Start Game
+      </button>
     </div>
   )
 
   const triviaPage = (
-    <div className='trivia-container'>
+    <div className="trivia-container">
       <Questions
         trivia={trivia}
         selectAnswer={selectAnswer}
         showAnswers={showAnswers}
       />
-      {!showAnswers
-        ? <button
-          className='trivia-button'
-          onClick={checkAnswers}
-        >
-          Check Answers</button>
-        : <div className='results-div'>
-          <h4 className='results'>You scored {correctCount}/5 correct answers</h4>
-          <button
-            className='trivia-button'
-            onClick={newGame}
-          >
-            New Questions</button>
+      {!showAnswers ? (
+        <button className="trivia-button" onClick={checkAnswers}>
+          Check Answers
+        </button>
+      ) : (
+        <div className="results-div">
+          <h4 className="results">
+            You scored {correctCount}/5 correct answers
+          </h4>
+          <button className="trivia-button" onClick={newGame}>
+            New Questions
+          </button>
         </div>
-      }
+      )}
     </div>
   )
 
   return (
     <main>
-      <div className="blob-yellow"></div>
+      {/* <div className="blob-yellow"></div> */}
       {startPage ? startPageDisplay : triviaPage}
-      <div className="blob-blue"></div>
+      {/* <div className="blob-blue"></div> */}
     </main>
   )
 }
