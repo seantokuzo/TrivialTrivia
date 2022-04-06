@@ -18,7 +18,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "launch": "sudo netlify deploy --prod",
+    "launch:dev": "sudo netlify deploy"
   },
   "eslintConfig": {
     "extends": [
